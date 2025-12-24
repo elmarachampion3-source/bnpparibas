@@ -1,0 +1,251 @@
+!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>BNP Finance – Espace Client (Maquette)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --green:#00965e;
+  --dark:#0f3d2e;
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --muted:#6b7c85;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Segoe UI, Arial, sans-serif;
+  background:var(--bg);
+}
+
+/* ===== LOGIN ===== */
+#login{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,var(--green),var(--dark));
+}
+.login-box{
+  background:white;
+  padding:35px;
+  width:330px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+.login-box h2{margin:0;color:var(--green)}
+.login-box p{color:#555}
+.login-box input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+}
+.login-box button{
+  width:100%;
+  padding:12px;
+  background:var(--green);
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+/* ===== APP ===== */
+#app{display:none}
+
+.sidebar{
+  width:240px;
+  height:100vh;
+  background:var(--green);
+  color:white;
+  position:fixed;
+  padding:20px;
+}
+.sidebar h2{
+  text-align:center;
+  margin-bottom:30px;
+}
+.sidebar a{
+  display:block;
+  padding:12px;
+  color:white;
+  text-decoration:none;
+  border-radius:6px;
+}
+.sidebar a:hover{
+  background:rgba(255,255,255,0.2);
+}
+
+.main{
+  margin-left:260px;
+  padding:30px;
+}
+
+.card{
+  background:var(--card);
+  padding:25px;
+  border-radius:12px;
+  margin-bottom:25px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.balance{
+  font-size:32px;
+  color:var(--dark);
+  font-weight:bold;
+}
+
+button.action{
+  background:var(--green);
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th, td{
+  padding:10px;
+  border-bottom:1px solid #ddd;
+  text-align:left;
+}
+th{background:#f0f4f2}
+
+small{color:var(--muted)}
+</style>
+</head>
+
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div id="login">
+  <div class="login-box">
+    <h2>BNP Finance</h2>
+    <p>Espace Client Sécurisé</p>
+    <input placeholder="Identifiant client">
+    <input type="password" placeholder="Mot de passe">
+    <button onclick="login()">Se connecter</button>
+    <small>Maquette académique – Données fictives</small>
+  </div>
+</div>
+
+<!-- ===== APPLICATION ===== -->
+<div id="app">
+  <div class="sidebar">
+    <h2>BNP Finance</h2>
+    <a onclick="show('dashboard')">🏠 Tableau de bord</a>
+    <a onclick="show('virement')">💸 Virements</a>
+    <a onclick="show('cartes')">💳 Cartes</a>
+    <a onclick="show('comptes')">📄 Comptes</a>
+    <a onclick="show('historique')">📊 Historique</a>
+    <a onclick="show('settings')">⚙️ Paramètres</a>
+  </div>
+
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page">
+      <div class="card">
+        <h3>Solde disponible</h3>
+        <div class="balance">2 450 000 FCFA</div>
+      </div>
+
+      <div class="card">
+        <h3>Dernières opérations</h3>
+        <ul>
+          <li>✔ Virement reçu – 150 000 FCFA</li>
+          <li>✔ Paiement carte – 25 000 FCFA</li>
+          <li>✔ Retrait DAB – 50 000 FCFA</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VIREMENT -->
+    <div id="virement" class="page" style="display:none">
+      <div class="card">
+        <h3>Effectuer un virement</h3>
+        <input placeholder="Nom du bénéficiaire">
+        <input placeholder="IBAN / Numéro de compte">
+        <input placeholder="Montant (FCFA)">
+        <textarea placeholder="Motif du virement"></textarea>
+        <button class="action">Valider le virement</button>
+      </div>
+    </div>
+
+    <!-- CARTES -->
+    <div id="cartes" class="page" style="display:none">
+      <div class="card">
+        <h3>Carte bancaire</h3>
+        <p>Carte VISA **** **** **** 4829</p>
+        <p>Statut : <b>Active</b></p>
+        <button class="action">Bloquer la carte</button>
+        <button class="action">Modifier plafonds</button>
+      </div>
+    </div>
+
+    <!-- COMPTES -->
+    <div id="comptes" class="page" style="display:none">
+      <div class="card">
+        <h3>Mes comptes</h3>
+        <p>Compte courant – 2 450 000 FCFA</p>
+        <p>Compte épargne – 1 200 000 FCFA</p>
+      </div>
+    </div>
+
+    <!-- HISTORIQUE -->
+    <div id="historique" class="page" style="display:none">
+      <div class="card">
+        <h3>Historique des transactions</h3>
+        <table>
+          <tr><th>Date</th><th>Opération</th><th>Montant</th></tr>
+          <tr><td>20/12/2025</td><td>Virement reçu</td><td>+150 000</td></tr>
+          <tr><td>18/12/2025</td><td>Paiement carte</td><td>-25 000</td></tr>
+          <tr><td>15/12/2025</td><td>Retrait DAB</td><td>-50 000</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="settings" class="page" style="display:none">
+      <div class="card">
+        <h3>Sécurité & paramètres</h3>
+        <button class="action">Changer mot de passe</button>
+        <button class="action">Activer double authentification</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function login(){
+  document.getElementById('login').style.display="none";
+  document.getElementById('app').style.display="block";
+}
+
+function show(page){
+  document.querySelectorAll('.page').forEach(p=>p.style.display="none");
+  document.getElementById(page).style.display="block";
+}
+</script>
+
+</body>
+</html>
+
